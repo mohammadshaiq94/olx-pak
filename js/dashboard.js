@@ -1,4 +1,6 @@
-var db = firebase.firestore()
+const db = firebase.firestore();
+const settings = {/* your settings... */ timestampsInSnapshots: true };
+db.settings(settings);
 
 var storageRef = firebase.storage().ref();
 
@@ -28,18 +30,18 @@ function sumbitAnAdd(event) {
 
     console.log(res)
 
-    
-    
+
+
     var formvalues = {
       Title: Title,
       Catagory: Catagory,
       Description: Description,
-      price:price,
+      price: price,
       Name: Name,
       Phone: Phone,
       imgs: res,
-      createAt: new Date()
-      
+      createAt: (new Date()).toString()
+
     }
 
 
@@ -52,12 +54,12 @@ function sumbitAnAdd(event) {
 
     var u_id = localStorage.getItem('user_id');
 
-    db.collection('ads').doc("user-id").collection(Catagory).add(formvalues)
+    db.collection(Catagory).add(formvalues)
       .then(() => {
 
         console.log('Added in db');
-       
-      
+
+
       }).catch(function (error) {
         var errorcode = error.code;
         var errorMessage = error.message;

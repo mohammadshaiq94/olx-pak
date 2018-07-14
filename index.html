@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
-    
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
 
@@ -25,7 +25,7 @@
             <h5 class="title">Pakistan's Largest Marketplace</h5>
         </div>
         <div>
-            <button class="btn submit" id="sub" >Submit an Ad</button>
+            <button class="btn submit" id="sub" onclick="toDashboard()">Submit an Ad</button>
             <button class="btnind" onClick="window.location='login.html'">
                 <i class="fas fa-user-alt"></i> My Account
             </button>
@@ -45,6 +45,7 @@
     </div>
 
 
+    <form onsubmit="viewAdBySearch(event)">
     <div class=" h-100 divSearch d-flex d-align-center">
             <div class="d-flex d-row m-auto w-90 bg-blach-light d-align-center border h-80 fieldsDiv ">
 
@@ -56,73 +57,82 @@
                     </div>
                     <input type="text" class="form-control" placeholder="All Pakistan" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
+
                 <div class="mobile-fields input-group ml-3 w-50">
                     <div class="input-group-prepend">
                         <span class="input-group-text bg-white ico" id="basic-addon1">
-                            <i class="fa fa-search"  id="ic1"></i>
+                            <i class="fa fa-search" id="ic1"></i>
                         </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Search An Ad" id="seaarchInp" aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" oninput="search()" list="list" id="input" placeholder="Search An Ad" id="seaarchInp"
+                        aria-label="Username" aria-describedby="basic-addon1">
                 </div>
 
                 <div class="ml-3">
-                    <button class="btn btn-primary w-130 mr-2" id="homebtn">
+                    <button class="btn btn-primary w-130 mr-2" id="homebtn" type="submit">
                         <i class="fa fa-search mr-2"></i>
-                        <span class="font-bold" >Search</span>
+                        <span class="font-bold">Search</span>
                     </button>
                 </div>
 
-            </div>
 
+            </div>
+        </div>
+    </form>
+
+
+
+
+    <datalist id="list">
+
+    </datalist>
+
+
+
+    <div class="row" onclick="viewCat(event)">
+        <div class="column" id="Property For Sell">
+            <img src="images/1.png" class="img-responsive" width="80" height="60">
+        </div>
+        <div class="column" id="Property For Rent">
+            <img src="images/2.png" class="img-responsive" width="80" height="60">
+        </div>
+        <div class="column" id="Cars">
+            <img src="images/3.png" class="img-responsive" width="80" height="60">
+        </div>
+        <div class="column" id="Bikes">
+            <img src="images/4.png" class="img-responsive" width="80" height="60">
+        </div>
+        <div class="column" id="Electronics">
+            <img src="images/5.png" class="img-responsive" width="80" height="60">
+        </div>
+        <div class="column" id="Mobiles">
+            <img src="images/6.png" class="img-responsive" width="80" height="60">
+        </div>
+        <div class="column" id="Jobs">
+            <img src="images/7.png" class="img-responsive" width="80" height="60">
+        </div>
+        <div class="column" id="Services">
+            <img src="images/8.png" class="img-responsive" width="80" height="60">
+        </div>
+        <div class="column" id="Business">
+            <img src="images/9.png" class="img-responsive" width="80" height="60">
+        </div>
+        <div class="column" id="Furniture">
+            <img src="images/10.png" class="img-responsive" width="80" height="60">
+        </div>
+        <div class="column" id="Animals">
+            <img src="images/11.png" class="img-responsive" width="80" height="60">
+        </div>
+        <div class="column" id="Books">
+            <img src="images/12.png" class="img-responsive" width="80" height="60">
+        </div>
+        <div class="column" id="Fashion">
+            <img src="images/13.png" class="img-responsive" width="80" height="60">
+        </div>
+        <div class="column" id="Kids">
+            <img src="images/14.png" class="img-responsive" width="80" height="60">
         </div>
 
-
-   
-
-        <div class="row">
-            <div class="column">
-              <img src="images/1.png" class="img-responsive" width="80" height="60">
-            </div>
-            <div class="column">
-                <img src="images/2.png" class="img-responsive" width="80" height="60">
-              </div> 
-              <div class="column">
-                <img src="images/3.png" class="img-responsive" width="80" height="60">
-              </div>
-              <div class="column">
-                <img src="images/4.png" class="img-responsive" width="80" height="60">
-              </div>
-              <div class="column">
-                <img src="images/5.png" class="img-responsive" width="80" height="60">
-              </div>
-              <div class="column">
-                <img src="images/6.png" class="img-responsive" width="80" height="60">
-              </div>
-              <div class="column">
-                <img src="images/7.png" class="img-responsive" width="80" height="60">
-              </div>
-              <div class="column">
-                <img src="images/8.png" class="img-responsive" width="80" height="60">
-              </div>
-              <div class="column">
-                <img src="images/9.png" class="img-responsive" width="80" height="60">
-              </div>
-              <div class="column">
-                <img src="images/10.png" class="img-responsive" width="80" height="60">
-              </div>
-              <div class="column">
-                <img src="images/11.png" class="img-responsive" width="80" height="60">
-              </div>
-              <div class="column">
-                <img src="images/12.png" class="img-responsive" width="80" height="60">
-              </div>
-              <div class="column">
-                <img src="images/13.png" class="img-responsive" width="80" height="60">
-              </div>
-              <div class="column">
-                <img src="images/14.png" class="img-responsive" width="80" height="60">
-              </div>
-            
 
 
 
@@ -211,3 +221,21 @@
 
         </footer>
         <!-- Footer -->
+
+        <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyDFLrkycQpWBi05v2RUOTlPpacNQvLT4cc",
+                authDomain: "olx-pak-fe511.firebaseapp.com",
+                databaseURL: "https://olx-pak-fe511.firebaseio.com",
+                projectId: "olx-pak-fe511",
+                storageBucket: "olx-pak-fe511.appspot.com",
+                messagingSenderId: "791616641732"
+            };
+            firebase.initializeApp(config);
+        </script>
+        <script src="js/main.js"></script>
+</body>
+
+</html>
