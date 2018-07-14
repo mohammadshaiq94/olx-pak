@@ -4,9 +4,7 @@ var storageRef = firebase.storage().ref();
 
 
 
-const firestore = firebase.firestore();
-  const settings = {/* your settings... */ timestampsInSnapshots: true};
-  firestore.settings(settings);
+
 
 
 function sumbitAnAdd(event) {
@@ -40,6 +38,7 @@ function sumbitAnAdd(event) {
       Name: Name,
       Phone: Phone,
       imgs: res,
+      createAt: new Date()
       
     }
 
