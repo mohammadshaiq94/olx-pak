@@ -7,10 +7,16 @@ console.log(firestore)
 
 
 const cat = localStorage.getItem("catsToView");
-
-
-
 let outcome = document.getElementById("output");
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+             .register('./service-worker.js')
+           .then(function() { console.log('Service Worker Registered'); });
+  }
+
+
+
 
 outcome.innerHTML = "";
 
@@ -22,7 +28,9 @@ firestore.collection(cat).get()
             console.log(selectFile.data());
             localStorage.setItem("adderId",selectFile.data().adderId)
             let data = selectFile.data()
-            outcome.innerHTML += `
+            outcome.innerHTML += 
+            
+            `
             <div class="container result mt-2 d-flex flex-row" id="${doc.docs[indexNo].id}" onclick="viewAd(event)">
             <div class="adImg d-flex">
                 <img src="${data.imgs}" class="w-80 align-self-center m-auto">
@@ -31,11 +39,11 @@ firestore.collection(cat).get()
                 <h5 id="title" class="mb-0">${data.Title}</h5>
                 <p class="text-muted mb-0">${data.Catagory}</p>
                 <h5 class= "float-left price" >Rs.${data.price}</h5>
-                <br/>
-                <p class="text-muted mb-0">${data.Description}</p>
             </div>
             </div>
             ` 
+
+
             indexNo++;
         });
     })

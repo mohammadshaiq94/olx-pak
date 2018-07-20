@@ -89,7 +89,7 @@ function viewAdBySearch(event){
     for(let i = 0; i < datalist.childNodes.length; i++){
         if(search == datalist.childNodes[i].value){
             addToView = datalist.childNodes[i].id;
-           
+            debugger
             catsToView = datalist.childNodes[i].title;
             break;
         }

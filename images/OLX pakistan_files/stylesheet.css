@@ -2,9 +2,6 @@
     color: black;
 }
 
-body{
-    background-color: aqua;
-}
 
 .row{
     background-color: white;
@@ -13,12 +10,6 @@ body{
     background-color: white;
     border: 15px solid rgb(75, 0, 82);
 }
-
-.container3{
-    background-color: white;
-    border: 15px solid rgb(0, 110, 255);
-}
-
 
 #btn1 {
     background-color: rgb(40, 0, 44);
@@ -56,7 +47,10 @@ body{
 
 
 
-
+.divSearch{
+    background-color:rgb(68, 0, 75);
+    opacity: .8;
+}
 
 .bg-blach-light{
     background-color: rgba(75, 0, 82);
@@ -99,10 +93,6 @@ body{
 }
 
 
-#chatbtn{
-    align-content: center;
-}
-
 .img-responsive {
     display: block;
     max-width: 100%;
@@ -121,7 +111,7 @@ body{
   .btn{
       
       margin-top: 30px;
-      margin-left: 20px;
+      margin-right: 20px;
       float: right;
       
   }
@@ -164,11 +154,6 @@ body{
       flex-direction: row;
   }
 
-  .container3{
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-}
 
 
   @media(max-width: 373px){
@@ -245,6 +230,16 @@ body{
         display: none !important;
     }
 
+    
+
+    #ic1{
+        display: none !important;
+    }
+
+    #ic2{
+        display: none !important;
+    }
+
 
     .column{
         align-content: center;
@@ -259,59 +254,44 @@ margin:auto;
 }
 
 
-@media (max-width:548px){
-    .column{
-       margin-left: 150px;
-    }
-    #basic-addon1{
-        display: none !important;
-    }
-    .form-control{
-        display: none !important;
-    }
-    #homebtn{
-        margin: auto;
-    }
-    
-    
-}
-
-
-
-
-
 .allChats{
     margin-top: 40px;
     height: 400px;
     overflow-y: auto;
     overflow-x: hidden;
 }
-
-
 .chatDiv{
-    height: 100px;
+    height: 80px;
     border: 1px solid rgb(216, 216, 216);
     border-radius: 8px
 }
-
-
-
-.receiverDetails{
+.profileImg{
+    height: 70px;
+    margin-left: 16px;
+    border: 0.5px solid rgb(184, 184, 184);
+    border-radius:50%; 
+}
+.chatBox{
+    height: 310px;
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 8px;
+    margin-bottom: 40px;
+    background-color: rgb(49, 0, 82);
+}
+.reciverDetals{
     
     width: 98% !important;
-    height: 80px;
-    background-color:rgb(11, 178, 255);
+    height: 60px;
+    background-color: #ff0095;
     color: white;
 }
-
-
 .messInp{
-    width: 98%;
+    width: 94%;
     object-position: bottom;
 }
-
-
-
+.bg-green{
+    background-color: rgb(49, 0, 82);
+}
 .messages{
     width: 98%;
     height: 200px;
@@ -319,25 +299,20 @@ margin:auto;
     overflow-y: auto;
     background-color: #fff;
 }
-
-.send_btn{
+.sendBtn{
     margin-top: 4px;
-    background-color: rgb(11, 178, 255);
-    border: 2px solid rgb(11, 178, 255);
+    background-color: #FF7A01;
+    border: 2px solid #FF7A01;
     border-radius: 50%;
     margin-left: 4px;
     cursor: pointer;
 }
-
-
-.chatbox{
-    height: 400px;
-    border: 1px solid rgb(216, 216, 216);
-    border-radius: 8px;
-    margin-bottom: 40px;
-    background-color: rgb(11, 178, 255);
+#recieverPic{
+    height: 86%;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    width: 60px;
 }
-
 
 .border{
     border: 1px solid #000 !important;
@@ -356,6 +331,7 @@ margin:auto;
 .cursor-pointer:hover{
     cursor: pointer;
 }
+
 
 
 

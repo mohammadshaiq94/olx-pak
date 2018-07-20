@@ -5,7 +5,19 @@ db.settings(settings);
 var storageRef = firebase.storage().ref();
 
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('./service-worker.js')
+    .then(function () { console.log('Service Worker Registered'); });
+}
 
+
+let currentUser
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) { currentuser = user.id }
+  else { console.log("not user") }
+})
 
 
 
@@ -20,17 +32,18 @@ function sumbitAnAdd(event) {
   var Name = document.getElementById("Name").value
   var Phone = document.getElementById("Phone").value
   var selectFile = document.getElementById("selectFile").files
-  var AdAdderId = document.getElementById("City").value
+  var adAdderId = document.getElementById("City").value
 
   let promises = uploadPics(selectFile);
 
   let urls = [];
 
+
+
+
   Promise.all(promises).then(function (res) {
 
     console.log(res)
-
-
 
     var formvalues = {
       Title: Title,
@@ -40,11 +53,10 @@ function sumbitAnAdd(event) {
       Name: Name,
       Phone: Phone,
       imgs: res,
-      createAt: (new Date()).toString()
+      createAt: (new Date()).toString(),
+      adAdderId: localStorage.getItem("user_id")
 
     }
-
-
     console.log(formvalues)
 
 
@@ -53,17 +65,12 @@ function sumbitAnAdd(event) {
 
 
     var u_id = localStorage.getItem('user_id');
-
     db.collection(Catagory).add(formvalues)
       .then(() => {
-
         console.log('Added in db');
-
-
       }).catch(function (error) {
         var errorcode = error.code;
         var errorMessage = error.message;
-
         console.log(errorMessage)
       })
 
