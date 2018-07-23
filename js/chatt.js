@@ -11,7 +11,7 @@ console.log("auth", auth);
 console.log("messaging", messaging);
 
 
-let cUser = localStorage.getItem("user");
+let cUser = localStorage.getItem("user_id");
 let chats = new Set();
 
 let previosChatsDiv = document.getElementById("allChats");
@@ -22,68 +22,13 @@ firestore.collection("messages").where("recieverId", "==", cUser)
             chats.add(selectFile.doc.id);
             firestore.collection('users').doc(selectFile.doc.data().senderId).get()
                 .then(doc => {
-
+                 
+                    if(!doc.data()) return 
                     previosChatsDiv.innerHTML += `
-                    <div class="w-80 m-auto chatDiv d-flex flex-row" id=${element.doc.id} onclick = "startChat(event)" >
-                    <div class="align-self-center">
-                    </div>
-                    <div class="ml-3 d-flex flex-column align-self-center cursor-pointer">
-                    <h5>${doc.data().Name}</h5>
-                    <span class="cursor-pointer">message....</span>
-                    <span class="cursor-pointer">At: time</span>
-                    </div>
-                    </div>
-                     `
-
-                })
-
-        })
-    })
-
-
-
-
-
-function startChat(event) {
-    let chatbox = document.getElementsByClassName("chatbox")[0];
-
-    if (event.target.nodeName == "SPAN" || event.target.nodeName == "H5") {
-        let target = (event.target.parentNode.parentNode).id;
-        console.log(target);
-        
-        chatbox.id = target;
-        firestore.collection("messages").doc(target)
-            .get().then(doc => {
-                if(doc.data().senderId !== localStorage.getItem("user")){
-                    localStorage.setItem("adderId" , doc.data().senderId)  
-                }else if(doc.data().recieverId !== localStorage.getItem("user")){
-                    localStorage.setItem("adderId" , doc.data().recieverId)
-                }
-                initailizeChatListner(target);
-            })
-        
-    }
-
-
-
-}
-
-var addKaUser = localStorage.getItem("adderId");
-
-
-
-firestore.collection("messages").where("senderId", "==", cUser)
-    .onSnapshot(function (querySnapshot) {
-        querySnapshot.docChanges().forEach(selectFile => {
-            chats.add(selectFile.doc.id);
-            firestore.collection('users').doc(selectFile.doc.data().recieverId).get()
-                .then(doc => {
-
-                    previosChatsDiv.innerHTML += `
-                        <div class="w-80 m-auto chatDiv d-flex flex-row" id=${selectFile.doc.id}>
-                       
-                        <div class="ml-3 d-flex flex-column align-self-center">
-                      
+                        <div class="w-80 m-auto chatDiv d-flex flex-row" id=${selectFile.doc.id} onclick = "startChat(event)" >
+                        
+                        <div class="ml-3 d-flex flex-column align-self-center cursor-pointer">
+                        <!-- <h5>${doc.data().Name}</h5> -->
                         <span class="cursor-pointer">message....</span>
                         <span class="cursor-pointer">At: time</span>
                         </div>
@@ -99,9 +44,61 @@ firestore.collection("messages").where("senderId", "==", cUser)
 
 
 
+function startChat(event) {
+    let chatBox = document.getElementsByClassName("chatBox")[0];
+
+    if (event.target.nodeName == "SPAN" || event.target.nodeName == "H5" || event.target.nodeName == "IMG") {
+        let target = (event.target.parentNode.parentNode).id;
+        console.log(target);
+        
+        chatBox.id = target;
+        firestore.collection("messages").doc(target)
+            .get().then(doc => {
+                if(doc.data().senderId !== localStorage.getItem("user_id")){
+                    localStorage.setItem("adAdderId" , doc.data().senderId)
+                }else if(doc.data().recieverId !== localStorage.getItem("user_id")){
+                    localStorage.setItem("adAdderId" , doc.data().recieverId)
+                }
+                initailizeChatListner(target);
+            })
+        
+    }
+
+
+
+}
+
+
+
+
+firestore.collection("messages").where("senderId", "==", cUser)
+    .onSnapshot(function (querySnapshot) {
+        querySnapshot.docChanges().forEach(selectFile => {
+            chats.add(selectFile.doc.id);
+            firestore.collection('users').doc(selectFile.doc.data().recieverId)
+                .then(doc => {
+
+                    previosChatsDiv.innerHTML += `
+                        <div class="w-80 m-auto chatDiv d-flex flex-row" id=${selectFile.doc.id}>
+                        
+                        <div class="ml-3 d-flex flex-column align-self-center">
+                        <!-- <h5 class="cursor-pointer">${doc.data().Name}</h5>-->
+                        <span class="cursor-pointer">message....</span>
+                        <span class="cursor-pointer">At: time</span>
+                        </div>
+                        </div>
+                         `
+
+                })
+            
+        })
+    })
+
+
+
+
 var recieverId = localStorage.getItem("adAdderId");
 var senderId = localStorage.getItem("user_id");
-
 
 
 
@@ -115,7 +112,7 @@ let currentChat;
 
 
 if (recieverId && senderId) {
-    let chatbox = document.getElementsByClassName("chatbox")[0];
+    let chatBox = document.getElementsByClassName("chatBox")[0];
     let messageDiv = document.getElementById("messageDiv");
 
 
@@ -129,12 +126,11 @@ if (recieverId && senderId) {
                 roomFound = true;
                 console.log("chat room Found>>>", chatRoom)
                 currentChat = chatRoom.id;
-                chatbox.id = chatRoom.id;
+                chatBox.id = chatRoom.id;
 
-                initailizeChatListner(currentChat)
+                initailizeChatListner(currentChat);
 
-               
-
+                
 
             })
 
@@ -159,7 +155,7 @@ function createRoom() {
             senderId: senderId,
             recieverId: recieverId,
         }).then(chatRoom => {
-            chatbox.id = chatRoom.id;
+            chatBox.id = chatRoom.id;
             currentChat = chatRoom.id;
             console.log("Chat room Created With This ID >", chatRoom.id);
             initailizeChatListner(chatRoom.id)
@@ -172,14 +168,14 @@ function createRoom() {
 }
 let chatInitialed = false;
 
-function send_Message(event) {
-    // event.preventDefault()
+function sendMessage(event) {
+     event.preventDefault(event);
 
     let messageToSend = document.getElementById("input").value;
-    let chatbox = document.getElementsByClassName("chatbox")[0];
-    
-    if (chatbox.id) {
-        firestore.collection("messages").doc(chatbox.id)
+    let chatBox = document.getElementsByClassName("chatBox")[0]
+   
+    if (chatBox.id) {
+        firestore.collection("messages").doc(chatBox.id)
             .collection("message").doc( ((new Date).getTime()).toString() ).set({
                 message: messageToSend,
                 senderId: senderId,
@@ -188,7 +184,7 @@ function send_Message(event) {
             }).then(docRef => {
                 if (chatInitialed == false) {
 
-                    initailizeChatListner(chatbox.id);
+                    initailizeChatListner(chatBox.id);
                     chatInitialed = true
 
                 }
@@ -200,22 +196,17 @@ function send_Message(event) {
             senderId: senderId,
             recieverId: recieverId
         }).then(docRef => {
-            chatbox.id = docRef.id;
-            send_Message();
+            chatBox.id = docRef.id;
+            sendMessage();
 
 
         })
 
 
         
-
     }
-
-
-
-
-
 }
+
 
 
 
@@ -266,7 +257,6 @@ function initailizeChatListner(chatId) {
 }
 
 
-
 // // const messaging = firebase.messaging();
 
 // messaging.requestPermission().then(function() {
@@ -312,6 +302,7 @@ function initailizeChatListner(chatId) {
 // });
 
 
+
 function signOut() {
 
     let btn = document.getElementById("logOUt");
@@ -324,6 +315,7 @@ function signOut() {
     })
 }
 
+ 
 
 
 

@@ -64,7 +64,7 @@ function sumbitAnAdd(event) {
 
 
 
-    var u_id = localStorage.getItem('user_id');
+    var adAdderId = localStorage.getItem('user_id');
     db.collection(Catagory).add(formvalues)
       .then(() => {
         console.log('Added in db');

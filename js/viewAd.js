@@ -16,18 +16,42 @@ console.log(adToView, catsToView)
 
 let data;
 
-firestore.collection(catsToView).doc(adToView).get()
-    .then(function (snapshot) {
-        console.log(snapshot.data());
-        data = snapshot.data();
-        localStorage.setItem("adAdderId",snapshot.data().adAdderId)
-    })
+
+
+// firestore.collection(catsToView).doc(adToView).get()
+//     .then(function (snapshot) {
+//         console.log(snapshot.data());
+//         data = snapshot.data();
+        
+
+//         let image = document.getElementById("img");
+//         image.display = `url(${data.imgs})`
+
+        
+//         let Title = document.getElementById("Title");
+//         Title.innerHTML = data.Title;
+
+//         let Catagory = document.getElementById("Catagory");
+//         Catagory.innerHTML = data.Catagory;
+
+//         let price = document.getElementById("price");
+//         price.innerHTML = `Rs.${data.price}`
+
+//         let Description = document.getElementById("Description");
+//         Description.innerHTML = data.Description;
+
+        
+    // })
+
+
+
+
 
 
 
 
 function chat(){
-    window.location = "chat.html";
+    window.location = "chatt.html";
 }
 
 
