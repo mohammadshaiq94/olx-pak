@@ -166,10 +166,11 @@ function createRoom() {
     })
 
 }
+
 let chatInitialed = false;
 
 function sendMessage(event) {
-    event.preventDefault();
+    if(event) event.preventDefault();
 
     let messageToSend = document.getElementById("input").value;
     let chatBox = document.getElementsByClassName("chatBox")[0]
