@@ -75,7 +75,7 @@ firestore.collection("messages").where("senderId", "==", cUser)
     .onSnapshot(function (querySnapshot) {
         querySnapshot.docChanges().forEach(selectFile => {
             chats.add(selectFile.doc.id);
-            firestore.collection('users').doc(selectFile.doc.data().recieverId)
+            firestore.collection('users').doc(selectFile.doc.data().recieverId).get()
                 .then(doc => {
 
                     previosChatsDiv.innerHTML += `
@@ -90,7 +90,7 @@ firestore.collection("messages").where("senderId", "==", cUser)
                          `
 
                 })
-            
+
         })
     })
 
@@ -169,7 +169,7 @@ function createRoom() {
 let chatInitialed = false;
 
 function sendMessage(event) {
-     event.preventDefault(event);
+    event.preventDefault();
 
     let messageToSend = document.getElementById("input").value;
     let chatBox = document.getElementsByClassName("chatBox")[0]
