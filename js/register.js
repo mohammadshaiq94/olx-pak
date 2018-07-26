@@ -43,7 +43,7 @@ function registerUser(event) {
     
 
     firebase.auth().createUserWithEmailAndPassword(email, password).then(function (res) {
-    
+        //localStorage.setItem("user", res.user.uid);
             alert('registered succesfully"')
 
             db.collection('users').doc(res.user.uid).set({name, email , uid : firebase.auth().currentUser.uid})

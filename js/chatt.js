@@ -11,7 +11,7 @@ console.log("auth", auth);
 console.log("messaging", messaging);
 
 
-let cUser = localStorage.getItem("user_id");
+let cUser = localStorage.getItem("adAdderid");
 let chats = new Set();
 
 let previosChatsDiv = document.getElementById("allChats");
@@ -20,10 +20,10 @@ firestore.collection("messages").where("recieverId", "==", cUser)
     .onSnapshot(function (querySnapshot) {
         querySnapshot.docChanges().forEach(selectFile => {
             chats.add(selectFile.doc.id);
-            firestore.collection('users').doc(selectFile.doc.data().senderId).get()
+            firestore.collection('users').doc("" + selectFile.doc.data().senderId + "").get()
                 .then(doc => {
-                 
-                    if(!doc.data()) return 
+
+                    if (!doc.data()) return
                     previosChatsDiv.innerHTML += `
                         <div class="w-80 m-auto chatDiv d-flex flex-row" id=${selectFile.doc.id} onclick = "startChat(event)" >
                         
@@ -50,18 +50,18 @@ function startChat(event) {
     if (event.target.nodeName == "SPAN" || event.target.nodeName == "H5" || event.target.nodeName == "IMG") {
         let target = (event.target.parentNode.parentNode).id;
         console.log(target);
-        
+
         chatBox.id = target;
         firestore.collection("messages").doc(target)
             .get().then(doc => {
-                if(doc.data().senderId !== localStorage.getItem("user_id")){
-                    localStorage.setItem("adAdderId" , doc.data().senderId)
-                }else if(doc.data().recieverId !== localStorage.getItem("user_id")){
-                    localStorage.setItem("adAdderId" , doc.data().recieverId)
+                if (doc.data().senderId !== localStorage.getItem("user_id")) {
+                    localStorage.setItem("adAdderId", doc.data().senderId)
+                } else if (doc.data().recieverId !== localStorage.getItem("user_id")) {
+                    localStorage.setItem("adAdderId", doc.data().recieverId)
                 }
                 initailizeChatListner(target);
             })
-        
+
     }
 
 
@@ -71,18 +71,17 @@ function startChat(event) {
 
 
 
+
 firestore.collection("messages").where("senderId", "==", cUser)
     .onSnapshot(function (querySnapshot) {
         querySnapshot.docChanges().forEach(selectFile => {
             chats.add(selectFile.doc.id);
-            firestore.collection('users').doc(selectFile.doc.data().recieverId).get()
+            firestore.collection('users').doc("" + selectFile.doc.data().recieverId + "").get()
                 .then(doc => {
-
                     previosChatsDiv.innerHTML += `
                         <div class="w-80 m-auto chatDiv d-flex flex-row" id=${selectFile.doc.id}>
-                        
                         <div class="ml-3 d-flex flex-column align-self-center">
-                        <!-- <h5 class="cursor-pointer">${doc.data().Name}</h5>-->
+                        <!-- <h5 class="cursor-pointer">${doc.data.Name}</h5>-->
                         <span class="cursor-pointer">message....</span>
                         <span class="cursor-pointer">At: time</span>
                         </div>
@@ -130,7 +129,7 @@ if (recieverId && senderId) {
 
                 initailizeChatListner(currentChat);
 
-                
+
 
             })
 
@@ -170,17 +169,17 @@ function createRoom() {
 let chatInitialed = false;
 
 function sendMessage(event) {
-    if(event) event.preventDefault();
+    if (event) event.preventDefault();
 
     let messageToSend = document.getElementById("input").value;
     let chatBox = document.getElementsByClassName("chatBox")[0]
-   
+
     if (chatBox.id) {
         firestore.collection("messages").doc(chatBox.id)
-            .collection("message").doc( ((new Date).getTime()).toString() ).set({
+            .collection("message").doc(((new Date).getTime()).toString()).set({
                 message: messageToSend,
                 senderId: senderId,
-                recieverId : recieverId,
+                recieverId: recieverId,
                 time: (new Date).toString()
             }).then(docRef => {
                 if (chatInitialed == false) {
@@ -204,7 +203,7 @@ function sendMessage(event) {
         })
 
 
-        
+
     }
 }
 
@@ -219,7 +218,7 @@ let messageDiv = document.getElementById("messageDiv");
 function initailizeChatListner(chatId) {
 
     const chatID = chatId;
-   
+
     if (chatID) {
 
         messageDiv.innerHTML = "";
@@ -316,7 +315,7 @@ function signOut() {
     })
 }
 
- 
+
 
 
 

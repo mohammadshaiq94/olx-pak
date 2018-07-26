@@ -32,7 +32,7 @@ function sumbitAnAdd(event) {
   var Name = document.getElementById("Name").value
   var Phone = document.getElementById("Phone").value
   var selectFile = document.getElementById("selectFile").files
-  var adAdderId = document.getElementById("City").value
+  var City = document.getElementById("City").value
 
   let promises = uploadPics(selectFile);
 
