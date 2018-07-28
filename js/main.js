@@ -98,7 +98,7 @@ function viewAdBySearch(event){
     localStorage.setItem("adToView",addToView);
     localStorage.setItem("catsToView",catsToView);
     console.log(addToView, catsToView)
-    window.location = "viewCat.html"
+    window.location = "viewAd.html"
 
 }
 

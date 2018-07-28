@@ -20,7 +20,7 @@
 
 
 
-<body class="bg-light">
+<body class="bg-light" id="bod1">
     <div class="container1">
         <div>
             <img src="images/olx.png" class="img-responsive" width="80" height="60">
@@ -36,14 +36,16 @@
     </div>
 
 
-
+    <div>
+        <button class="btn6 btn-lg btn-block" id="btn6" style="display:none;" onclick="toDashboard()">Submit an Ad</button>
+    </div>
 
 
 
 
     <header class="py-2 text-center bg-light text-white">
         <div class="container">
-            <h3 style="font-family:fantasy; letter-spacing:10px; color:rgb(77, 0, 77);">OLX PAKISTAN</h3>
+            <h3 style="font-family:fantasy; letter-spacing:10px; color:rgba(75, 0, 82);" id="text">OLX PAKISTAN</h3>
         </div>
     </header>
 
@@ -51,9 +53,6 @@
 
 
 
-    <div>
-        <div class="w-100 text-white bg-orange add mx-3">Submit An Ad</div>
-    </div>
 
 
 
@@ -70,7 +69,7 @@
                             <i class="fa fa-map-marker-alt" id="ic1"></i>
                         </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="All Pakistan" aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" placeholder="All Pakistan" aria-label="Username" aria-describedby="basic-addon1" id="formcon">
                 </div>
 
 
@@ -108,7 +107,7 @@
 
 
 
-    <div class="row" onclick="viewCat(event)">
+    <div class="row" onclick="viewCat(event)" id="img1">
         <div class="column" id="Property For Sell">
             <img src="images/1.png" class="img-responsive" width="80" height="60">
         </div>

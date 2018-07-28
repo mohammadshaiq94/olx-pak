@@ -257,32 +257,34 @@ function initailizeChatListner(chatId) {
 }
 
 
-// // const messaging = firebase.messaging();
-
-// messaging.requestPermission().then(function() {
+ 
+// if(senderId){
+// firebase.messaging().requestPermission().then(function() {
 // 	console.log('Notification permission granted.');
 // 	return messaging.getToken()
-// }).then(function(currentToken) {
-// 	console.log('currentToken', currentToken);
+// }).then(function(Token) {
+// 	firebase.firestore().collection('users').doc(user_id).update({
+//         token: token
+//     })
 // }).catch(function(err) {
 // 	console.log('Unable to get permission to notify.', err);
 // });
-
-// messaging.onMessage((payload) => {
-// 	console.log('payload', payload)
-// })
+// }
+// else{
+//     console.log('login please')
+// }
 
 
 // //Way to push notification using fetch!
 
 
 // //Server Key (Firebase -> Project -> Settings -> Cloud Messaging -> Server Key
-// var key = 'AAAAuFAHWsQ:APA91bGIhu6LHqmZJ1wSfYlECtzYtZefKxe9nSQWGmWfu6U6qoLSHs1BfW76iGN8LfVgCv0yQZl_yBXIRnqRsKKnd0KFua654D8S_B3S5SBphmZ5tV8XvoYfwptWHWpwMfmXZwN2KQfqfZ5s10PPAqZh6dN-McFYTQ';
+// var key = 'AIzaSyBTmpnrK6O4edYW2zdTPEvd2MVfB1HvSuY';
 // //token
 // var to = 'eIPZ0eXePFE:APA91bGMPx3AJfNnWaIs0Ui5uN72aNpxYelOBYhwXqHlQ26SLWrc9Kh3aYGLCM5Ypq3RfE1cHpV8nFcMTVvfcMuW8vCRVgCTCaYrqz5lajH7r3owQkYng50Ftgvrvojrhkd2Ndz0q_Xu';
 // var notification = {
-// 	'title': 'Portugal vs. Denmark',
-// 	'body': '5 to 1'
+// 	'title': 'New Message',
+// 	'body': message
 // };
 
 // fetch('https://fcm.googleapis.com/fcm/send', {
